@@ -2,7 +2,7 @@
  * configuracion:
  *[
  *  {
- *    src: ['!src/templates/client/**', 'src/templates/*.jade'],
+ *    src: 'src/static/styles/*.styl',
  *    dest: 'dist'
  *  }
  *]
@@ -41,7 +41,7 @@ module.exports = function(configs) {
   gulp.task('styles', function() {
 
     configs.forEach(function(config) {
-      gulp.src(config.files)
+      gulp.src(config.src)
 
       .pipe(gulpif(condition, stylus({
         use: nib(),
@@ -50,7 +50,7 @@ module.exports = function(configs) {
 
       .pipe(gulpif(condition, csso()))
 
-      .pipe(gulpif(condition, gulp.dest(config.build_path)));
+      .pipe(gulpif(condition, gulp.dest(config.dest)));
     });
   });
 };
