@@ -23,7 +23,7 @@ var csso = require('gulp-csso');
 var cwd = process.cwd();
 
 var default_config = {
-  src: path.join(cwd, 'src', 'static', 'styles', '**', '*.styl'),
+  src: path.join(cwd, 'src', 'static', 'styles', '*.styl'),
   dest: path.join(cwd, 'dist', 'static', 'styles')
 };
 
