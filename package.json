@@ -12,6 +12,8 @@
     "gulp-csso": "^1.0.1",
     "gulp-if": "^2.0.0",
     "gulp-stylus": "^2.1.0",
+    "lodash": "^3.10.1",
+    "yargs": "^3.30.0",
     "nib": "^1.1.0"
   },
   "devDependencies": {},

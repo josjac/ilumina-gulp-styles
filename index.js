@@ -1,13 +1,3 @@
-/*
- * configuracion:
- *[
- *  {
- *    src: 'src/static/styles/*.styl',
- *    dest: 'dist'
- *  }
- *]
- */
-
 var gulp = require('gulp');
 
 var path = require('path');
@@ -20,11 +10,23 @@ var nib = require('nib');
 
 var csso = require('gulp-csso');
 
+var yargs = require('yargs').argv;
+
+var _ = require('lodash');
+
 var cwd = process.cwd();
 
 var default_config = {
   src: path.join(cwd, 'src', 'static', 'styles', '*.styl'),
   dest: path.join(cwd, 'dist', 'static', 'styles')
+};
+
+var self = {
+  config: default_config,
+  run: function(config) {
+    config = _.assign(this.config, config);
+    styles(config);
+  }
 };
 
 function condition(file) {
@@ -35,22 +37,21 @@ function condition(file) {
   }
 }
 
-module.exports = function(configs) {
-  configs = configs || [default_config];
+function styles(config) {
+  return gulp.src(config.src)
 
-  gulp.task('styles', function() {
+  .pipe(gulpif(condition, stylus({
+    use: nib(),
+    compress: (yargs.prod)? true : false
+  })))
 
-    configs.forEach(function(config) {
-      gulp.src(config.src)
+  .pipe(gulpif(yargs.prod, gulpif(condition, csso())))
 
-      .pipe(gulpif(condition, stylus({
-        use: nib(),
-        compress: true
-      })))
+  .pipe(gulpif(condition, gulp.dest(config.dest)));
+}
 
-      .pipe(gulpif(condition, csso()))
+gulp.task('styles', function() {
+  self.run();
+});
 
-      .pipe(gulpif(condition, gulp.dest(config.dest)));
-    });
-  });
-};
+module.exports = self;
