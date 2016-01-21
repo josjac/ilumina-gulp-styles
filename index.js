@@ -23,9 +23,11 @@ var default_config = {
 
 var self = {
   config: default_config,
+  set: function(config) {
+    this.config = _.assign(this.config, config);
+  },
   run: function(config) {
-    config = _.assign(this.config, config);
-    styles(config);
+    styles(config || this.config);
   }
 };
 
