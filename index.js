@@ -32,11 +32,11 @@ var self = {
 };
 
 function condition(file) {
-  if (file.relative.indexOf('/') === -1) {
+  if (file.relative.indexOf('/') !== file.relative.length) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
 
 function styles(config) {
