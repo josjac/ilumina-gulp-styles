@@ -6,9 +6,10 @@ var gulpif = require('gulp-if');
 
 var stylus = require('gulp-stylus');
 
-var nib = require('nib');
 
 var csso = require('gulp-csso');
+
+var poststylus = require('poststylus');
 
 var yargs = require('yargs').argv;
 
@@ -18,7 +19,15 @@ var cwd = process.cwd();
 
 var default_config = {
   src: path.join(cwd, 'src', 'static', 'styles', '*.styl'),
-  dest: path.join(cwd, 'dist', 'static', 'styles')
+  dest: path.join(cwd, 'dist', 'static', 'styles'),
+  use: [
+    require('nib')(),
+    require('axis')(),
+    poststylus([
+      'rucksack-css',
+      'css-mqpacker'
+    ])
+  ]
 };
 
 var self = {
@@ -43,7 +52,7 @@ function styles(config) {
   return gulp.src(config.src)
 
   .pipe(gulpif(condition, stylus({
-    use: nib(),
+    use: config.use,
     compress: (yargs.prod)? true : false
   })))
 
