@@ -1,6 +1,6 @@
 {
   "name": "ilumina-gulp-styles",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "gulp task for styles",
   "main": "index.js",
   "engines": {
@@ -16,6 +16,7 @@
     "gulp-stylus": "^2.1.0",
     "lodash": "^3.10.1",
     "nib": "^1.1.0",
+    "pixrem": "^3.0.1",
     "poststylus": "^0.2.3",
     "rucksack-css": "^0.8.6",
     "yargs": "^3.30.0"

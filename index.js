@@ -6,7 +6,6 @@ var gulpif = require('gulp-if');
 
 var stylus = require('gulp-stylus');
 
-
 var csso = require('gulp-csso');
 
 var poststylus = require('poststylus');
@@ -25,6 +24,7 @@ var default_config = {
     require('axis')(),
     poststylus([
       'rucksack-css',
+      'pixrem',
       'css-mqpacker'
     ])
   ]
