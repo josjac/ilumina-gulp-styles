@@ -24,8 +24,7 @@ var default_config = {
     require('axis')(),
     poststylus([
       'rucksack-css',
-      'pixrem',
-      'css-mqpacker'
+      'pixrem'
     ])
   ]
 };
